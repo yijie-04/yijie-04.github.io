@@ -29,14 +29,13 @@ html, body {
   overflow-y: scroll;
 }
 
-#about-text a {
-  color: rgba(12, 103, 95, 0.81);      /* custom color */
+.content a {
+  color: rgba(12, 103, 95, 0.81);
   text-decoration: none;
 }
 
-/* Hover state */
-#about-text a:hover {
-  color: rgba(16, 136, 128, 0.5);      /* color when hovered */
+.content a:hover {
+  color: rgba(16, 136, 128, 0.5);
   text-decoration: underline;
 }
 
@@ -59,7 +58,7 @@ html, body {
 
   /* Left column */
   .left-column {
-    flex: 1;
+    flex: 0.75;
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -127,7 +126,7 @@ html, body {
 
   /* Right column */
   .right-column {
-    flex: 1;
+    flex: 0.75;
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -148,10 +147,10 @@ html, body {
 .sidebar-nav a {
   display: block;
   padding: 0.75rem 1.2rem;
-  border-radius: 25px;   /* pill shape */
+  border-radius: 15px;   /* pill shape */
   border: 2px solid rgba(16, 136, 128, 0.5);
   background: rgba(255, 255, 255, 0.1);
-  color: #111;
+  color: #fff;
   text-decoration: none;
   text-align: center;
   font-weight: 500;
@@ -180,7 +179,7 @@ footer {
 }
 
   a {
-    color: #007acc;
+    color: rgba(16, 136, 128, 0.5);
     text-decoration: none;
   }
 
@@ -191,7 +190,7 @@ footer {
   .social-icons {
     margin-top: 1rem;
     display: flex;
-    gap: 0.5rem; /* space between icons if you add more later */
+    gap: 0.3rem; /* space between icons if you add more later */
     justify-content: center; /* center under your name */
     }
 
@@ -200,16 +199,29 @@ footer {
     }
 
     .social-icon {
-    width: 40px;
-    height: 40px;
+    color: rgba(18, 160, 151, 0.884);
+    width: 30px;
+    height: 30px;
     transition: transform 0.3s ease, opacity 0.3s ease;
     }
-
-    .social-icon:hover {
-    transform: scale(1.2); /* subtle hover effect */
-    opacity: 0.8;
-    }
     
+.education-item {
+  display: flex;
+  align-items: flex-start; /* vertically centers content */
+  gap: 1rem; /* space between image and text */
+  margin-bottom: 2rem;
+}
+
+.edu-logo {
+  width: 90px;  /* adjust as needed */
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px; /* optional rounded corners */
+}
+
+.edu-text h3 {
+  margin: 0;
+}
   /* Responsive */
   @media (max-width: 992px) {
     .wrapper {
@@ -270,6 +282,12 @@ footer {
       <a href="https://www.linkedin.com/in/yijie-wang0806/" target="_blank">
         <i class="fa-brands fa-linkedin social-icon"></i>
       </a>
+      <a href="https://github.com/yijie-04" target="_blank">
+        <i class="fa-brands fa-github social-icon"></i>
+      </a>
+      <a href="mailto:yijies.wang@mail.utoronto.ca">
+        <i class="fa-solid fa-envelope social-icon"></i>
+      </a>
     </div>
   </div>
 
@@ -290,28 +308,149 @@ footer {
     </script>
 
     <section id="education">
-      <h2>Education</h2>
-      <div class="item">
-        <h3>University Name <span>— Degree, Major</span></h3>
-        <span>Expected Graduation: 202X</span>
-      </div>
+    <h2>Education</h2>
+    <div class="item education-item">
+        <img src="uoft.png" alt="University of Toronto Logo" class="edu-logo">
+        <div class="edu-text">
+        <h3>
+        University of Toronto 
+        <span>— BASc. in 
+            <a href="https://engsci.utoronto.ca/program/what-is-engsci/" target="_blank">
+            Engineering Science
+            </a>
+        </span>
+        </h3>
+
+        <span>Expected Graduation: 2027</span><br>
+
+        <b>
+        <a href="https://engsci.utoronto.ca/program/majors/robotics-engineering/" target="_blank">
+            Robotics Major
+        </a>, 
+        <a href="https://undergrad.engineering.utoronto.ca/academics-registration/engineering-minors-certificates/global-leadership-minor/" target="_blank">
+            Global Leadership Minor
+        </a>
+        </b>
+        <br>
+        (p.s. you can find my testimonial in the embedded minor link)
+
+        <br> Cumulative GPA: 3.99/4.0        </div>
+    </div>
     </section>
 
     <section id="work">
-      <h2>Work Experience</h2>
+      <h2>Experience</h2>
       <div class="item">
-        <h3>Company Name <span>— Position</span></h3>
-        <span>Dates</span>
-        <p>Brief description of responsibilities and achievements.</p>
+        <div class="item education-item">
+        <img src="gm.png" alt="General Motors Logo" class="edu-logo">
+        <div class="edu-text">
+        <h3>
+        <a href="https://www.gm.com" target="_blank">
+            General Motors
+        </a> 
+        <span>— Simulation Intern</span>
+        </h3>
+
+        <span>05/2025-Present</span>
+        <p>Developing realistic software-in-the-loop (SiL) automotive simulation environments and supporting algorithm
+            development for Software Defined Vehicle (SDV) architecture, including hands-free driving,
+            active safety features, in-vehicle infotainment, and embedded control systems.
+        </p>
+        </div>
       </div>
+      <div class="item">
+        <div class="item education-item">
+        <img src="rvl.png" alt="General Motors Logo" class="edu-logo">
+        <div class="edu-text">
+        <h3>
+        <a href="https://rvl.cs.toronto.edu/" target="_blank">
+            Robot, Vision & Learning Lab
+        </a> 
+        <span>— Researcher</span>
+        </h3>
+
+        <span>08/2025-Present</span>
+        <p>Spending my free time reading into robotics literature and working on a cool robotics project. Stay tuned!
+        </p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item education-item">
+        <img src="ac.png" alt="AC Logo" class="edu-logo">
+        <div class="edu-text">
+        <h3><a href="https://acceleration.utoronto.ca" target="_blank">
+            Acceleration Consortium
+        </a>  <span>— Robotics Researcher</span></h3>
+        <span>05/2024-03/2025</span>
+        <p> Conducted research on constrained motion planning for robotics manipulators. Developed a safe and reactive
+            motion planner based on Model Predictive Control (MPC) for autonomous chemistry experimentation, using the NVIDIA cuRobo library. Integrated
+            planner with a chemistry lab digital twin in Isaac Sim.
+        </p>
+        </div>
+      </div>
+      
     </section>
 
     <section id="projects">
       <h2>Projects</h2>
       <div class="item">
-        <h3>Project Title</h3>
-        <p>Description of project and <a href="#">GitHub link</a>.</p>
+        <div class="item education-item">
+        <img src="autoronto.png" alt="autoronto Logo" class="edu-logo">
+        <div class="edu-text">
+        <h3><a href="https://www.autodrive.utoronto.ca" target="_blank">
+            aUToronto
+        </a>  <span>— Simulation Lead</span></h3>
+        <span>09/2024-Present</span>
+        <p> As a part of University of Toronto’s winning autonomous vehicle team, I have contributed to motion planning,
+            localization, simulation. In 2024, I built a behaviour planner, and performed simulated and 
+            in-vehicle tests. In 2025, I led the simulation efforts and obtained 1st place in the MathWorks
+            Simulation Challenge against 10 other university teams. I'm currently working on designing
+            lane localization algorithms for the autonomous vehicle under GPS attenuation scenarios, along
+            with leading the simulation efforts again this year.
+        </p>
+        </div>
       </div>
+      <div class="item">
+        <div class="item education-item">
+        <img src="esec.png" alt="ESEC Logo" class="edu-logo">
+        <div class="edu-text">
+        <h3><a href="https://engsci.utoronto.ca/experience/esec/esec-2025-home/" target="_blank">
+            Engineering Science Education Conference
+        </a>  <span>— Co-Chair</span></h3>
+        <span>04/2024-02/2025</span>
+        <p> Planned and oversaw all aspects of the annual Engineering Science Education Conference (ESEC) for first and second year Engineering Science students (~500 people)
+            Worked closely with the Division of Engineering Science to identify this year's goals and priorities.
+        </p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item education-item">
+        <img src="lfx.png" alt="LFX Logo" class="edu-logo">
+        <div class="edu-text">
+        <h3><a href="https://www.linuxfoundation.org" target="_blank">
+            Linux Foundation
+        </a>  <span>— LFX Mentee</span></h3>
+        <span>03/2024-05/2024</span>
+        <p> Implemented a highly requested feature in Go that enabled cross namespace referencing for event links in Knative Eventing, 
+            resulting in the completion of a critical feature to the community. Released feature in Knative 1.15 as an alpha feature and authored a blog post, 
+            contributing to the open-source ecosystem.
+            <br> You can check out my blog post:
+            <div style="border:1px solid #ccc; border-radius:8px; padding:16px; max-width:300px; font-family:sans-serif;">
+            <a href="https://knative.dev/blog/articles/cross-namespace-event-links-feature/" style="text-decoration:none; color:black;">
+                <img src="lfx2.png" alt="Example Image" style="width:100%; border-radius:6px 6px 0 0;">
+                <h3 style="margin:8px 0 4px 0;">My LFX Mentorship Experience: Cross Namespace Event Links Feature ¶</h3>
+            </a>
+            </div>
+        </p>
+        </div>
+      </div>
+    </section>
+    <section id="interests">
+        <h2>Interests</h2>
+        <p>I love all forms of art, whether through painting, music, or literature. Below you can find some of my current favourites:</p>
+        <b>Currently reading:</b> "No. 91/92: A Diary of a Year on the Bus" by Lauren Elkin
+        <br>
+        <b>Currently playing:</b> <a href="https://www.youtube.com/watch?v=c5DScnVwhG0" target="_blank">"La Valse au Clair de Lune" by Eric Christian</a>
     </section>
   </div>
 
@@ -320,14 +459,15 @@ footer {
     <nav class="sidebar-nav">
       <a href="#about">About Me</a>
       <a href="#education">Education</a>
-      <a href="#work">Work Experience</a>
+      <a href="#work">Experience</a>
       <a href="#projects">Projects</a>
+      <a href="#interests">Interests</a>
     </nav>
   </div>
 </div>
 
 <footer>
-  <p>© 2025 Yijie Wang | <a href="#">GitHub</a> | <a href="mailto:youremail@example.com">Email</a></p>
+  <p>© 2025 Yijie Wang | <a href="mailto:yijies.wang@mail.utoronto.ca">Email</a></p>
 </footer>
 
 </body>
