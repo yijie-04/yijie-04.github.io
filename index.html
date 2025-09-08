@@ -4,7 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-<title>Portfolio with Side Background</title>
+<script src="https://kit.fontawesome.com/69b15ab2a1.js" crossorigin="anonymous"></script>
+<title>Yijie Wang</title>
 <style>
   html {
     scroll-behavior: smooth;
@@ -18,7 +19,7 @@
     line-height: 1.6;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* ensures body fills viewport */
+    height: 100vh; /* ensures body fills viewport */
   }
 html, body {
   margin: 0;
@@ -42,17 +43,18 @@ html, body {
   /* Wrapper for left + right background */
  .wrapper {
   display: flex;
-  height: 100vh;       
+  min-height: auto;       
   background-image: url('background.jpg'); /* your JPG here */
   background-size: cover;   /* cover the entire wrapper */
   background-repeat: no-repeat;
   background-position: center;
+  flex-direction: row;
 }
 
 .content-wrapper {
   display: flex;
   flex: 1;                /* grow to fill space between header and footer */
-  min-height: 100vh;          /* prevents overflow in flex children */
+  height: 100vh;          /* prevents overflow in flex children */
 }
 
   /* Left column */
@@ -64,6 +66,7 @@ html, body {
     align-items: center;
     padding: 2rem;
     box-sizing: border-box;
+    height: 100vh;
   }
 
   .left-column img {
@@ -131,6 +134,7 @@ html, body {
     justify-content: center;
     padding: 2rem;
     box-sizing: border-box;
+    height: 100vh;
   }
 
   .sidebar-nav {
@@ -138,6 +142,7 @@ html, body {
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem; /* spacing between tabs */
+  position: fixed;
 }
 
 .sidebar-nav a {
@@ -183,6 +188,28 @@ footer {
     text-decoration: underline;
   }
 
+  .social-icons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem; /* space between icons if you add more later */
+    justify-content: center; /* center under your name */
+    }
+
+    .social-icons a {
+    display: inline-block;
+    }
+
+    .social-icon {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .social-icon:hover {
+    transform: scale(1.2); /* subtle hover effect */
+    opacity: 0.8;
+    }
+    
   /* Responsive */
   @media (max-width: 992px) {
     .wrapper {
@@ -199,6 +226,8 @@ footer {
       justify-content: flex-start;
       align-items: center;
       padding: 1rem;
+      position: sticky;
+      top: 0;
     }
 
     .left-column img {
@@ -215,12 +244,16 @@ footer {
       flex-direction: row;
       justify-content: center;
       padding: 1rem;
+      position: sticky;
+      top: 0;
     }
 
     .sidebar-nav {
       flex-direction: row;
       flex-wrap: wrap;
       gap: 0.5rem;
+      position: sticky;
+      top: 0;
     }
   }
 </style>
@@ -234,6 +267,9 @@ footer {
     <div>
       <h1>Yijie Wang</h1>
       <p>University of Toronto<br>Robotics Engineering</p>
+      <a href="https://www.linkedin.com/in/yijie-wang0806/" target="_blank">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
     </div>
   </div>
 
