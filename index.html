@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<title>Portfolio with Side Background</title>
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #fafafa;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* ensures body fills viewport */
+  }
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;  /* prevents horizontal scroll */
+  overflow-y: scroll;
+}
+
+#about-text a {
+  color: rgba(12, 103, 95, 0.81);      /* custom color */
+  text-decoration: none;
+}
+
+/* Hover state */
+#about-text a:hover {
+  color: rgba(16, 136, 128, 0.5);      /* color when hovered */
+  text-decoration: underline;
+}
+
+  /* Wrapper for left + right background */
+ .wrapper {
+  display: flex;
+  height: 100vh;       
+  background-image: url('background.jpg'); /* your JPG here */
+  background-size: cover;   /* cover the entire wrapper */
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.content-wrapper {
+  display: flex;
+  flex: 1;                /* grow to fill space between header and footer */
+  min-height: 100vh;          /* prevents overflow in flex children */
+}
+
+  /* Left column */
+  .left-column {
+    flex: 1;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+
+  .left-column img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    border: 3px solid #fff;
+  }
+
+  .left-column h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .left-column p {
+    margin: 0.5rem 0 1.5rem;
+    font-size: 1rem;
+    color: #ccc;
+    text-align: center;
+  }
+
+  /* Middle column */
+  .content {
+    flex: 2;
+    padding: 2rem;
+    background: #fafafa; /* distinct background */
+    box-sizing: border-box;
+  }
+
+  section {
+    margin-bottom: 3rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+  }
+
+  .item {
+    margin-bottom: 1.5rem;
+  }
+
+  .item h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #111;
+  }
+
+  .item span {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  /* Right column */
+  .right-column {
+    flex: 1;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+
+  .sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem; /* spacing between tabs */
+}
+
+.sidebar-nav a {
+  display: block;
+  padding: 0.75rem 1.2rem;
+  border-radius: 25px;   /* pill shape */
+  border: 2px solid rgba(16, 136, 128, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+  color: #111;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 500;
+  width: 90%;
+  transition: all 0.3s ease;
+}
+
+.sidebar-nav a:hover {
+  background: rgba(16, 136, 128, 0.5); /* highlight color */
+  transform: translateX(5px); /* subtle hover animation */
+}
+
+.sidebar-nav a.active {
+  background: rgba(16, 136, 128, 0.5);
+  font-weight: bold;
+}
+  
+footer {
+  width: 100%;
+  text-align: center;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+  background: #111;
+  color: #aaa;
+  flex-shrink: 0; /* ensures footer doesn’t shrink */
+}
+
+  a {
+    color: #007acc;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsive */
+  @media (max-width: 992px) {
+    .wrapper {
+      flex-direction: column;
+    }
+
+    .left-column, .content, .right-column {
+      flex: none;
+      width: 100%;
+    }
+
+    .left-column {
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .left-column img {
+      width: 80px;
+      height: 80px;
+      margin-right: 1rem;
+    }
+
+    .left-column h1, .left-column p {
+      text-align: left;
+    }
+
+    .right-column {
+      flex-direction: row;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .sidebar-nav {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+  <!-- Left column: profile -->
+  <div class="left-column">
+    <img src="pfp.png" alt="Yijie Wang">
+    <div>
+      <h1>Yijie Wang</h1>
+      <p>University of Toronto<br>Robotics Engineering</p>
+    </div>
+  </div>
+
+  <!-- Middle column: content -->
+  <div class="content">
+    <section id="about">
+      <h2>About Me</h2>
+      <div id="about-text"></div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+    fetch('about.md')
+    .then(res => res.text())
+    .then(md => {
+        document.getElementById('about-text').innerHTML = marked.parse(md);
+    });
+    </script>
+
+    <section id="education">
+      <h2>Education</h2>
+      <div class="item">
+        <h3>University Name <span>— Degree, Major</span></h3>
+        <span>Expected Graduation: 202X</span>
+      </div>
+    </section>
+
+    <section id="work">
+      <h2>Work Experience</h2>
+      <div class="item">
+        <h3>Company Name <span>— Position</span></h3>
+        <span>Dates</span>
+        <p>Brief description of responsibilities and achievements.</p>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="item">
+        <h3>Project Title</h3>
+        <p>Description of project and <a href="#">GitHub link</a>.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Right column: tabs -->
+  <div class="right-column">
+    <nav class="sidebar-nav">
+      <a href="#about">About Me</a>
+      <a href="#education">Education</a>
+      <a href="#work">Work Experience</a>
+      <a href="#projects">Projects</a>
+    </nav>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Yijie Wang | <a href="#">GitHub</a> | <a href="mailto:youremail@example.com">Email</a></p>
+</footer>
+
+</body>
+</html>
