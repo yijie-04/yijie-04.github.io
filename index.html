@@ -137,36 +137,39 @@ html, body {
   }
 
   .sidebar-nav {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem; /* spacing between tabs */
-  position: fixed;
-}
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem; /* spacing between tabs */
+    z-index: 1000;
+  }
 
-.sidebar-nav a {
-  display: block;
-  padding: 0.75rem 1.2rem;
-  border-radius: 15px;   /* pill shape */
-  border: 2px solid rgba(16, 136, 128, 0.5);
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  text-decoration: none;
-  text-align: center;
-  font-weight: 500;
-  width: 90%;
-  transition: all 0.3s ease;
-}
+  .sidebar-nav a {
+    display: block;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;   /* pill shape */
+    border: 2px solid rgba(16, 136, 128, 0.5);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
 
-.sidebar-nav a:hover {
-  background: rgba(16, 136, 128, 0.5); /* highlight color */
-  transform: translateX(5px); /* subtle hover animation */
-}
+  .sidebar-nav a:hover {
+    background: rgba(16, 136, 128, 0.5); /* highlight color */
+    transform: translateY(-2px); /* subtle hover animation */
+  }
 
-.sidebar-nav a.active {
-  background: rgba(16, 136, 128, 0.5);
-  font-weight: bold;
-}
+  .sidebar-nav a.active {
+    background: rgba(16, 136, 128, 0.5);
+    font-weight: bold;
+  }
   
 footer {
   width: 100%;
@@ -252,25 +255,27 @@ footer {
       text-align: left;
     }
 
-    .right-column {
-      flex-direction: row;
-      justify-content: center;
-      padding: 1rem;
-      position: sticky;
-      top: 0;
-    }
-
     .sidebar-nav {
-      flex-direction: row;
+      top: 0.5rem;
+      right: 0.5rem;
       flex-wrap: wrap;
       gap: 0.5rem;
-      position: sticky;
-      top: 0;
+      justify-content: flex-end;
     }
   }
 </style>
 </head>
 <body>
+
+<nav class="sidebar-nav">
+  <a href="#about">About Me</a>
+  <a href="#education">Education</a>
+  <a href="#pub">Publications</a>
+  <a href="#work">Experience</a>
+  <a href="#projects">Projects</a>
+  <a href="#interests">Interests</a>
+  <a href="gallery.html">Gallery</a>
+</nav>
 
 <div class="wrapper">
   <!-- Left column: profile -->
@@ -279,15 +284,17 @@ footer {
     <div>
       <h1>Yijie Wang</h1>
       <p>University of Toronto<br>Robotics Engineering</p>
-      <a href="https://www.linkedin.com/in/yijie-wang0806/" target="_blank">
-        <i class="fa-brands fa-linkedin social-icon"></i>
-      </a>
-      <a href="https://github.com/yijie-04" target="_blank">
-        <i class="fa-brands fa-github social-icon"></i>
-      </a>
-      <a href="mailto:yijies.wang@mail.utoronto.ca">
-        <i class="fa-solid fa-envelope social-icon"></i>
-      </a>
+      <div class="social-icons">
+        <a href="https://www.linkedin.com/in/yijie-wang0806/" target="_blank">
+          <i class="fa-brands fa-linkedin social-icon"></i>
+        </a>
+        <a href="https://github.com/yijie-04" target="_blank">
+          <i class="fa-brands fa-github social-icon"></i>
+        </a>
+        <a href="mailto:yijies.wang@mail.utoronto.ca">
+          <i class="fa-solid fa-envelope social-icon"></i>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -478,18 +485,6 @@ footer {
     </section>
   </div>
 
-  <!-- Right column: tabs -->
-  <div class="right-column">
-    <nav class="sidebar-nav">
-      <a href="#about">About Me</a>
-      <a href="#education">Education</a>
-      <a href="#pub">Publications</a>
-      <a href="#work">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#interests">Interests</a>
-      <a href="gallery.html">Gallery</a>
-    </nav>
-  </div>
 </div>
 
 <footer>
