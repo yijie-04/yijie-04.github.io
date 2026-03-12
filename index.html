@@ -42,12 +42,13 @@ html, body {
   /* Wrapper for left + right background */
  .wrapper {
   display: flex;
-  min-height: auto;       
+  min-height: auto;
   background-image: url('background.jpg'); /* your JPG here */
   background-size: cover;   /* cover the entire wrapper */
   background-repeat: no-repeat;
   background-position: center;
   flex-direction: row;
+  margin-top: 3.2rem; /* space for fixed top tab strip */
 }
 
 .content-wrapper {
@@ -124,6 +125,56 @@ html, body {
     color: #666;
   }
 
+  /* Publications layout */
+  .pub-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .pub-item {
+    display: grid;
+    grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .pub-teaser img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    object-fit: cover;
+  }
+
+  .pub-details h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .pub-meta {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .pub-meta-badge {
+    display: inline-block;
+    background-color:#007BFF;
+    color:white;
+    padding:3px 8px;
+    border-radius:4px;
+    font-size:0.85em;
+  }
+
+  .pub-links {
+    margin-top: 0.25rem;
+    font-size: 0.9rem;
+  }
+
+  .pub-links a {
+    margin-right: 0.75rem;
+  }
+
   /* Right column */
   .right-column {
     flex: 0.75;
@@ -138,37 +189,41 @@ html, body {
 
   .sidebar-nav {
     position: fixed;
-    top: 1rem;
-    right: 1rem;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
-    flex-direction: row;
+    justify-content: flex-end;
     align-items: center;
     gap: 0.75rem; /* spacing between tabs */
+    padding: 0.5rem 1rem;
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     z-index: 1000;
   }
 
   .sidebar-nav a {
     display: block;
-    padding: 0.5rem 1rem;
-    border-radius: 999px;   /* pill shape */
-    border: 2px solid rgba(16, 136, 128, 0.5);
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
+    padding: 0.4rem 0.9rem;
+    border-radius: 8px;   /* rounded corners, more squared */
+    border: 1px solid rgba(16, 136, 128, 0.4);
+    background: transparent;
+    color: #111;
     text-decoration: none;
     text-align: center;
     font-weight: 500;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     white-space: nowrap;
   }
 
   .sidebar-nav a:hover {
-    background: rgba(16, 136, 128, 0.5); /* highlight color */
-    transform: translateY(-2px); /* subtle hover animation */
+    background: rgba(16, 136, 128, 0.1); /* subtle highlight */
+    transform: translateY(-1px); /* subtle hover animation */
   }
 
   .sidebar-nav a.active {
-    background: rgba(16, 136, 128, 0.5);
-    font-weight: bold;
+    background: rgba(16, 136, 128, 0.15);
+    font-weight: 600;
   }
   
 footer {
@@ -347,19 +402,32 @@ footer {
 
     <section id="pub">
       <h2>Publications</h2>
-      <h3><strong>MATTERIX: Towards a Digital Twin for Robotics-Assisted Chemistry Lab Automation</strong></h3>
-      <p>
-        <span style="background-color:#007BFF; color:white; padding:3px 8px; border-radius:4px; font-size:0.9em;">
-          Nature Computational Science (Cover Article, In Press)
-        </span>
-      </p>
-      <p>
-        <em>Kourosh Darvish, Arjun Sohal, Abhijoy Mandal, Hatem Fakhruldeen, Nikola Radulov, Zhengxue Zhou, Joshua Choi, Skyler Han, Brayden Zhang, Jeeyeoun Chae, Satheeshkumar Veeramani, Alex Wright, <strong>Yijie Wang</strong>, Hossein Darvish, Yuchi (Allan) Zhao, Gary Tom, Han Hao, Miroslav Bogdanovic, Gabriella Pizzuto, Andrew Cooper, Alan Aspuru-Guzik, Florian Shkurti, Animesh Garg.</em>
-      </p>
-      <p>
-        Matterix is a multi-scale, GPU-accelerated robotic simulation framework designed to create high-fidelity digital twins of chemistry labs, thus accelerating workflow development. This multi-scale digital twin simulates robotic physical manipulation, powder and liquid dynamics, device functionalities, heat transfer, and basic chemical reaction kinetics. This is enabled by integrating realistic physics simulation and photorealistic rendering with a modular GPU-accelerated semantics engine, which models logical states and continuous behaviors to simulate chemistry workflows across different levels of abstraction.
-      </p>
-
+      <div class="pub-list">
+        <div class="pub-item">
+          <div class="pub-teaser">
+            <img src="chem_robo.png" alt="MATTERIX robotic chemistry lab visualization">
+          </div>
+          <div class="pub-details">
+            <h3>
+              <a href="https://www.nature.com/articles/s43588-025-00924-4" target="_blank">
+                MATTERIX: Towards a Digital Twin for Robotics-Assisted Chemistry Lab Automation
+              </a>
+            </h3>
+            <div class="pub-meta">
+              <span class="pub-meta-badge">Nature Computational Science, 2025</span>
+            </div>
+            <p>
+              <em>Kourosh Darvish, Arjun Sohal, Abhijoy Mandal, Hatem Fakhruldeen, Nikola Radulov, Zhengxue Zhou, Joshua Choi, Skyler Han, Brayden Zhang, Jeeyeoun Chae, Satheeshkumar Veeramani, Alex Wright, <strong>Yijie Wang</strong>, Hossein Darvish, Yuchi (Allan) Zhao, Gary Tom, Han Hao, Miroslav Bogdanovic, Gabriella Pizzuto, Andrew Cooper, Alan Aspuru-Guzik, Florian Shkurti, Animesh Garg.</em>
+            </p>
+            <p>
+              Matterix is a multi-scale, GPU-accelerated robotic simulation framework designed to create high-fidelity digital twins of chemistry labs, thus accelerating workflow development. This multi-scale digital twin simulates robotic physical manipulation, powder and liquid dynamics, device functionalities, heat transfer, and basic chemical reaction kinetics. This is enabled by integrating realistic physics simulation and photorealistic rendering with a modular GPU-accelerated semantics engine, which models logical states and continuous behaviors to simulate chemistry workflows across different levels of abstraction.
+            </p>
+            <div class="pub-links">
+              <a href="https://www.nature.com/articles/s43588-025-00924-4" target="_blank">Paper</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="work">
@@ -484,6 +552,9 @@ footer {
         <b>Currently playing:</b> <a href="https://www.youtube.com/watch?v=c5DScnVwhG0" target="_blank">"La Valse au Clair de Lune" by Eric Christian</a>
     </section>
   </div>
+
+  <!-- Right column: empty column to restore three-column layout -->
+  <div class="right-column"></div>
 
 </div>
 
