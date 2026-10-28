@@ -1,560 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="preload" href="background.jpg" as="image" fetchpriority="high">
-<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-<script src="https://kit.fontawesome.com/69b15ab2a1.js" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yijie Wang</title>
+<meta name="description" content="Yijie Wang, robotics engineering student at the University of Toronto working on world models and robot learning.">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400&family=Fraunces:ital,opsz,wght@1,9..144,400&display=swap" rel="stylesheet">
 <style>
-  html {
-    scroll-behavior: smooth;
-  }
-  body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #fafafa;
-    color: #333;
-    line-height: 1.6;
-    display: flex;
-    flex-direction: column;
-    height: 100vh; /* ensures body fills viewport */
-  }
-html, body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  overflow-x: hidden;  /* prevents horizontal scroll */
-  overflow-y: scroll;
-}
-
-.content a {
-  color: rgba(12, 103, 95, 0.81);
-  text-decoration: none;
-}
-
-.content a:hover {
-  color: rgba(16, 136, 128, 0.5);
-  text-decoration: underline;
-}
-
-  /* Wrapper for left + right background */
- .wrapper {
-  display: flex;
-  min-height: auto;
-  background-color: #0b2530; /* shown while the image loads */
-  background-image: url('background.jpg'); /* your JPG here */
-  background-size: cover;   /* cover the entire wrapper */
-  background-repeat: no-repeat;
-  background-position: center;
-  flex-direction: row;
-  margin-top: 3.2rem; /* space for fixed top tab strip */
-}
-
-.content-wrapper {
-  display: flex;
-  flex: 1;                /* grow to fill space between header and footer */
-  height: 100vh;          /* prevents overflow in flex children */
-}
-
-  /* Left column */
-  .left-column {
-    flex: 0.6;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    box-sizing: border-box;
-    height: 100vh;
-  }
-
-  .left-column img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-bottom: 1rem;
-    border: 3px solid #fff;
-  }
-
-  .left-column h1 {
-    margin: 0;
-    font-size: 1.8rem;
-    text-align: center;
-  }
-
-  .left-column p {
-    margin: 0.5rem 0 1.5rem;
-    font-size: 1rem;
-    color: #ccc;
-    text-align: center;
-  }
-
-  /* Middle column */
-  .content {
-    flex: 2.8;
-    padding: 2rem;
-    background: #fafafa; /* distinct background */
-    box-sizing: border-box;
-  }
-
-  section {
-    margin-bottom: 3rem;
-  }
-
-  h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 0.5rem;
-  }
-
-  .item {
-    margin-bottom: 1.5rem;
-  }
-
-  .item h3 {
-    margin: 0;
-    font-size: 1.2rem;
-    color: #111;
-  }
-
-  .item span {
-    font-size: 0.9rem;
-    color: #666;
-  }
-
-  /* Publications layout */
-  .pub-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .pub-item {
-    display: grid;
-    grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
-    gap: 1.5rem;
-    align-items: flex-start;
-  }
-
-  .pub-teaser img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-    object-fit: cover;
-  }
-
-  .pub-details h3 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-  }
-
-  .pub-meta {
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
-  }
-
-  .pub-meta-badge {
-    display: inline-block;
-    background-color:#007BFF;
-    color:white;
-    padding:3px 8px;
-    border-radius:4px;
-    font-size:0.85em;
-  }
-
-  .pub-links {
-    margin-top: 0.25rem;
-    font-size: 0.9rem;
-  }
-
-  .pub-links a {
-    margin-right: 0.75rem;
-  }
-
-  /* Right column */
-  .right-column {
-    flex: 0.6;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 2rem;
-    box-sizing: border-box;
-    height: 100vh;
-  }
-
-  .sidebar-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 0.75rem; /* spacing between tabs */
-    padding: 0.5rem 1rem;
-    background: #ffffff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    z-index: 1000;
-  }
-
-  .sidebar-nav a {
-    display: block;
-    padding: 0.4rem 0.9rem;
-    border-radius: 8px;   /* rounded corners, more squared */
-    border: 1px solid rgba(16, 136, 128, 0.4);
-    background: transparent;
-    color: #111;
-    text-decoration: none;
-    text-align: center;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-  }
-
-  .sidebar-nav a:hover {
-    background: rgba(16, 136, 128, 0.1); /* subtle highlight */
-    transform: translateY(-1px); /* subtle hover animation */
-  }
-
-  .sidebar-nav a.active {
-    background: rgba(16, 136, 128, 0.15);
-    font-weight: 600;
-  }
-  
-footer {
-  width: 100%;
-  text-align: center;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.85rem;
-  background: #111;
-  color: #aaa;
-  flex-shrink: 0; /* ensures footer doesn’t shrink */
-}
-
-  a {
-    color: rgba(16, 136, 128, 0.5);
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-
-  .social-icons {
-    margin-top: 1rem;
-    display: flex;
-    gap: 0.3rem; /* space between icons if you add more later */
-    justify-content: center; /* center under your name */
-    }
-
-    .social-icons a {
-    display: inline-block;
-    }
-
-    .social-icon {
-    color: rgba(18, 160, 151, 0.884);
-    width: 30px;
-    height: 30px;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-    
-.education-item {
-  display: flex;
-  align-items: flex-start; /* vertically centers content */
-  gap: 1rem; /* space between image and text */
-  margin-bottom: 2rem;
-}
-
-.edu-logo {
-  width: 90px;  /* adjust as needed */
-  height: auto;
-  object-fit: contain;
-  border-radius: 8px; /* optional rounded corners */
-}
-
-.edu-text h3 {
-  margin: 0;
-}
-  /* Responsive */
-  @media (max-width: 992px) {
-    .wrapper {
-      flex-direction: column;
-    }
-
-    .left-column, .content, .right-column {
-      flex: none;
-      width: 100%;
-    }
-
-    .left-column {
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-      padding: 1rem;
-      position: sticky;
-      top: 0;
-    }
-
-    .left-column img {
-      width: 80px;
-      height: 80px;
-      margin-right: 1rem;
-    }
-
-    .left-column h1, .left-column p {
-      text-align: left;
-    }
-
-    .sidebar-nav {
-      top: 0.5rem;
-      right: 0.5rem;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      justify-content: flex-end;
-    }
+  :root { --ink: #161616; --muted: #6b6b6b; --faint: #9a9a9a; --rule: #e6e6e6; --accent: #2f5d62; --accent-soft: #c9dadb; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; color: var(--ink); font: 15px/1.65 'Inter Tight', system-ui, sans-serif; }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-soft); }
+  a:hover { border-bottom-color: var(--accent); }
+  header { position: sticky; top: 0; background: rgba(255,255,255,.92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--rule); z-index: 2; }
+  header .in { max-width: 880px; margin: 0 auto; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  header b { font-weight: 600; }
+  header nav { display: flex; gap: 20px; font-size: 13.5px; }
+  header nav a { color: var(--muted); border: 0; }
+  main { max-width: 880px; margin: 0 auto; padding: 48px 24px 64px; }
+  .intro { display: grid; grid-template-columns: 170px minmax(0,1fr); gap: 36px; align-items: start; }
+  .intro img { width: 170px; height: 212px; object-fit: cover; display: block; border-radius: 12px; }
+  .intro .cap { font-size: 11.5px; color: var(--faint); margin-top: 6px; }
+  h1 { font-size: 36px; font-weight: 500; letter-spacing: -.02em; line-height: 1.1; margin: 0 0 4px; }
+  .role { color: var(--muted); margin-bottom: 16px; }
+  .intro p { margin: 0 0 12px; }
+  .seeking { color: #b42318; font-weight: 500; }
+  .links { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; margin-top: 18px; }
+  html { scroll-behavior: smooth; }
+  section { margin-top: 56px; scroll-margin-top: 76px; }
+  h2 { font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; font-weight: 500; color: var(--faint); border-top: 1px solid var(--ink); padding-top: 14px; margin: 0 0 20px; }
+  .news div { display: grid; grid-template-columns: 90px minmax(0,1fr); gap: 16px; padding: 5px 0; }
+  .news span:first-child { color: var(--faint); font-variant-numeric: tabular-nums; }
+  .pub { display: grid; grid-template-columns: 170px minmax(0,1fr); gap: 24px; align-items: start; }
+  .pub img { width: 170px; height: 120px; object-fit: cover; display: block; border: 1px solid var(--rule); border-radius: 8px; }
+  .pt { font-weight: 600; font-size: 16px; line-height: 1.35; }
+  .pt a { color: inherit; border-bottom: 1px solid transparent; }
+  .pt a:hover { border-bottom-color: var(--ink); }
+  .bib { margin: 10px 0 0; padding: 10px 12px; background: #f6f6f6; border-radius: 6px; font-size: 11.5px; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .au { color: var(--muted); font-size: 13.5px; margin: 6px 0 4px; }
+  .au b { color: var(--ink); font-weight: 600; }
+  .venue { font-style: italic; font-size: 14px; }
+  .btns { display: flex; gap: 8px; margin-top: 10px; }
+  .btns a { font-size: 12px; border: 1px solid #d4d4d4; color: #333; padding: 2px 10px; border-radius: 3px; }
+  .btns a:hover { border-color: var(--accent); color: var(--accent); }
+  .exp { display: grid; grid-template-columns: 44px minmax(0,1fr) auto; gap: 16px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+  .exp:first-of-type { padding-top: 0; }
+  .exp img { width: 44px; height: 44px; object-fit: contain; }
+  .exp .t { font-weight: 600; }
+  .exp .t span { font-weight: 400; color: var(--muted); }
+  .exp .d { color: var(--muted); font-size: 14px; margin-top: 2px; }
+  .exp .when { color: var(--faint); font-size: 13px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .badge { display: inline-block; font-size: 11px; color: var(--accent); background: #eef4f4; border-radius: 99px; padding: 0 8px; margin-left: 6px; vertical-align: 1px; }
+  .research { border-left: 2px solid var(--accent); padding: 2px 0 2px 22px; }
+  .research .rt { font-weight: 600; font-size: 18px; line-height: 1.35; letter-spacing: -.01em; }
+  .research .meta { color: var(--faint); font-size: 13px; margin: 4px 0 12px; }
+  .research p { margin: 0 0 12px; }
+  .research ul { margin: 0 0 12px; padding-left: 18px; color: #333; }
+  .research li { margin: 4px 0; }
+  .research .now { font-size: 14px; color: var(--muted); }
+  .outside { font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; color: #4a4a4a; line-height: 1.6; }
+  .outside a { color: inherit; border-bottom-color: #bbb; }
+  .outside a:hover { border-bottom-color: var(--ink); }
+  .outside b { font-weight: 400; color: var(--ink); }
+  footer { max-width: 880px; margin: 0 auto; padding: 24px; border-top: 1px solid var(--rule); color: var(--faint); font-size: 12.5px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  @media (max-width: 620px) {
+    .intro, .pub { grid-template-columns: minmax(0,1fr); gap: 18px; }
+    .intro img { width: 130px; height: 162px; }
+    .pub img { width: 100%; height: 160px; }
+    .exp { grid-template-columns: 36px minmax(0,1fr); }
+    .exp img { width: 36px; height: 36px; }
+    .exp .when { grid-column: 2; }
+    h1 { font-size: 30px; }
   }
 </style>
 </head>
 <body>
+<header><div class="in">
+  <b>Yijie Wang</b>
+  <nav><!-- <a href="#research">Research</a> --><a href="#publications">Publications</a><a href="#experience">Experience</a></nav>
+</div></header>
 
-<nav class="sidebar-nav">
-  <a href="#about">About Me</a>
-  <a href="#education">Education</a>
-  <a href="#pub">Publications</a>
-  <a href="#work">Experience</a>
-  <a href="#projects">Projects</a>
-</nav>
-
-<div class="wrapper">
-  <!-- Left column: profile -->
-  <div class="left-column">
-    <img src="pfp.png" alt="Yijie Wang">
+<main>
+  <div class="intro">
+    <div>
+      <img src="pfp.jpg" alt="Yijie Wang">
+    </div>
     <div>
       <h1>Yijie Wang</h1>
-      <p>University of Toronto<br>Robotics Engineering</p>
-      <div class="social-icons">
-        <a href="https://www.linkedin.com/in/yijie-wang0806/" target="_blank">
-          <i class="fa-brands fa-linkedin social-icon"></i>
-        </a>
-        <a href="https://github.com/yijie-04" target="_blank">
-          <i class="fa-brands fa-github social-icon"></i>
-        </a>
-        <a href="mailto:yijies.wang@mail.utoronto.ca">
-          <i class="fa-solid fa-envelope social-icon"></i>
-        </a>
+      <div class="role">Robotics · Engineering Science, University of Toronto</div>
+      <p>I'm an undergraduate robotics engineering student at the University of Toronto. I'm interested in what representations embodied agents need to generalize to new environments and interactions in the physical world, and how they can learn them.</p>
+      <p>I'm working with Dr. Kashyap Chitta and Prof. Andreas Geiger at <a target="_blank" rel="noopener" href="https://kesai.eu">KE:SAI</a> on action-conditioned world models for autonomous driving, and writing my thesis with Prof. Florian Shkurti at the <a target="_blank" rel="noopener" href="https://rvl.cs.toronto.edu/">Robot, Vision &amp; Learning Lab</a>. Before that, I worked on simulation and motion planning for autonomous vehicles and robotic chemistry labs.</p>
+      <p>I'm especially interested in latent world models for sample-efficient prediction and planning, and the science of robot learning and interpretability. My goal is to build robot models whose internal representations are causally grounded and verifiable, so that we can trust them in the real world.</p>
+      <p class="seeking">I'm looking for Master's and PhD positions in robotics research starting Fall 2027.</p>
+      <div class="links">
+        <a href="mailto:yijies.wang@mail.utoronto.ca">Email</a>
+        <a target="_blank" rel="noopener" href="https://github.com/yijie-04">GitHub</a>
+        <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/yijie-wang0806/">LinkedIn</a>
       </div>
     </div>
   </div>
 
-  <!-- Middle column: content -->
-  <div class="content">
-    <section id="about">
-      <h2>About Me</h2>
-      <div id="about-text"></div>
-    </section>
+  <section id="news">
+    <h2>News</h2>
+    <div class="news">
+      <div><span>Sep 2026</span><span>Started my undergraduate thesis at the Robot, Vision &amp; Learning Lab.</span></div>
+      <div><span>May 2026</span><span>3rd place in the <a target="_blank" rel="noopener" href="https://huggingface.co/spaces/KIT-MRT/KITScenes-LongTail-Challenge">KITScenes LongTail Few-Shot Challenge</a> with KE:SAI.</span></div>
+      <div><span>Oct 2025</span><span>Our aUToronto simulation suite is featured on the <a target="_blank" rel="noopener" href="https://blogs.mathworks.com/student-lounge/2025/10/06/autoronto-simulation-suite-v2x-messaging-and-emergency-vehicle-yielding/">MathWorks blog</a>.</span></div>
+      <div><span>2025</span><span><a target="_blank" rel="noopener" href="https://www.nature.com/articles/s43588-025-00924-4">MATTERIX</a> is published in <i>Nature Computational Science</i>.</span></div>
+      <div><span>May 2025</span><span>Started as a Simulation Intern at General Motors.</span></div>
+    </div>
+  </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script>
-    fetch('about.md')
-    .then(res => res.text())
-    .then(md => {
-        document.getElementById('about-text').innerHTML = marked.parse(md);
-    });
-    </script>
+  <!-- Research section: hidden for now
+  <section id="research">
+    <h2>Research</h2>
+    <div class="research">
+      <div class="rt">Action-Conditioned World Models for Autonomous Driving</div>
+      <div class="meta">Ongoing · KE:SAI and University of Toronto · with Dr. Kashyap Chitta and Prof. Andreas Geiger</div>
+      <p>Adapting <a href="#">Alpamayo 1.5</a> for the KITScenes LongTail Challenge (3rd place), I found that internet-scale pretraining gives rich scene understanding, but the policy still falls back on the typical behaviour for a scene, ignoring instructions or its own chain-of-thought. Imitation learning treats action generation as pattern matching rather than causal intervention.</p>
+      <p>I'm instead learning action-conditioned representations in a compact latent space and planning over them with sampling. Following <a href="#">TD-MPC</a>, a rectified-flow model is trained jointly with reward and value prediction, so TD learning pushes the latent space toward driving-relevant features: motion, geometry and causal structure.</p>
+      <ul>
+        <li>In unanchored latent spaces, recursive TD updates make terminal value predictions grow without bound.</li>
+        <li>Offline driving logs contain one action per state, so the model cannot learn to tell candidate actions apart.</li>
+        <li>Adding counterfactual data, with alternative actions and their rewards, improved action ranking and closed-loop performance.</li>
+      </ul>
+      <div class="now">Now extending this to closed-loop training in <a href="#">AlpaSim</a>.</div>
+    </div>
+  </section>
+  -->
 
-    <section id="education">
+  <section id="publications">
+    <h2>Publications</h2>
+    <div class="pub">
+      <img src="matterix.jpg" alt="MATTERIX">
+      <div>
+        <div class="pt"><a target="_blank" rel="noopener" href="https://www.nature.com/articles/s43588-025-00924-4">MATTERIX: Toward a Digital Twin for Robotics-Assisted Chemistry Laboratory Automation</a></div>
+        <div class="au">Kourosh Darvish, Arjun Sohal, Abhijoy Mandal, … <b>Yijie Wang</b>, … Alán Aspuru-Guzik, Florian Shkurti, Animesh Garg</div>
+        <div class="venue">Nature Computational Science, 2025</div>
+        <div class="btns"><a target="_blank" rel="noopener" href="https://www.nature.com/articles/s43588-025-00924-4">Paper</a><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2601.13232">arXiv</a><a href="#" onclick="this.closest('.pub').querySelector('.bib').toggleAttribute('hidden');return false">BibTeX</a></div>
+        <pre class="bib" hidden>@article{darvish2025matterix,
+  title   = {MATTERIX: toward a digital twin for robotics-assisted chemistry laboratory automation},
+  author  = {Darvish, Kourosh and Sohal, Arjun and Mandal, Abhijoy and Fakhruldeen, Hatem and Radulov, Nikola and Zhou, Zhengxue and Veeramani, Satheeshkumar and Choi, Joshua and Han, Sijie and Zhang, Brayden and Chae, Jeeyeoun and Wright, Alex and Wang, Yijie and Darvish, Hossein and Zhao, Yuchi and Tom, Gary and Hao, Han and Bogdanovic, Miroslav and Pizzuto, Gabriella and Cooper, Andrew I. and Aspuru-Guzik, Al{\'a}n and Shkurti, Florian and Garg, Animesh},
+  journal = {Nature Computational Science},
+  year    = {2025},
+  doi     = {10.1038/s43588-025-00924-4}
+}</pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <div class="exp">
+      <img src="rvl.png" alt="">
+      <div><div class="t">Robot, Vision &amp; Learning Lab <span>· Thesis Student</span></div>
+      <div class="d">Undergraduate thesis with Prof. Florian Shkurti.</div></div>
+      <div class="when">2026 – now</div>
+    </div>
+    <div class="exp">
+      <img src="kesai-icon.png" alt="KE:SAI">
+      <div><div class="t">KE:SAI <span>· Researcher</span><span class="badge">3rd, KITScenes LongTail Challenge 2026</span></div>
+      <div class="d">Physical AI lab founded by Kyutai and the ELLIS Institute Tübingen.</div>
+      <div class="d">World models for autonomous driving with Dr. Kashyap Chitta and Prof. Andreas Geiger. <a target="_blank" rel="noopener" href="https://huggingface.co/spaces/KIT-MRT/KITScenes-LongTail-Challenge">Leaderboard</a></div></div>
+      <div class="when">2026 – now</div>
+    </div>
+    <div class="exp">
+      <img src="gm.png" alt="">
+      <div><div class="t">General Motors <span>· Simulation Intern</span></div>
+      <div class="d">Software-in-the-loop simulation for hands-free driving and active safety.</div></div>
+      <div class="when">2025 – 2026</div>
+    </div>
+    <div class="exp">
+      <img src="autoronto.png" alt="">
+      <div><div class="t">aUToronto <span>· Simulation Lead</span><span class="badge">1st, MathWorks Simulation Challenge 2025 &amp; 2026</span></div>
+      <div class="d">Led the simulation team to 1st place in the MathWorks Simulation Challenge two years in a row.</div>
+      <div class="d">Behaviour planning and lane localization for U of T's autonomous vehicle team. <a target="_blank" rel="noopener" href="https://blogs.mathworks.com/student-lounge/2025/10/06/autoronto-simulation-suite-v2x-messaging-and-emergency-vehicle-yielding/">Blog post</a></div></div>
+      <div class="when">2024 – 2026</div>
+    </div>
+    <div class="exp">
+      <img src="ac.png" alt="">
+      <div><div class="t">Acceleration Consortium <span>· Robotics Researcher</span></div>
+      <div class="d">Safe, reactive MPC motion planning for lab manipulators with NVIDIA cuRobo and Isaac Sim.</div>
+      <div class="d">Work published in <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s43588-025-00924-4"><i>Nature Computational Science</i></a>.</div></div>
+      <div class="when">2024 – 2025</div>
+    </div>
+    <div class="exp">
+      <img src="lfx.png" alt="">
+      <div><div class="t">Linux Foundation <span>· LFX Mentee</span></div>
+      <div class="d">Shipped cross-namespace event links in Knative Eventing 1.15. <a target="_blank" rel="noopener" href="https://knative.dev/blog/articles/cross-namespace-event-links-feature/">Blog post</a></div></div>
+      <div class="when">2024</div>
+    </div>
+  </section>
+
+  <section>
     <h2>Education</h2>
-    <div class="item education-item">
-        <img src="uoft.png" alt="University of Toronto Logo" class="edu-logo">
-        <div class="edu-text">
-        <h3>
-        University of Toronto 
-        <span>— BASc. in 
-            <a href="https://engsci.utoronto.ca/program/what-is-engsci/" target="_blank">
-            Engineering Science
-            </a>
-        </span>
-        </h3>
-
-        <span>Expected Graduation: 2027</span><br>
-
-        <b>
-        <a href="https://engsci.utoronto.ca/program/majors/robotics-engineering/" target="_blank">
-            Robotics Major
-        </a>, 
-        <a href="https://undergrad.engineering.utoronto.ca/academics-registration/engineering-minors-certificates/global-leadership-minor/" target="_blank">
-            Global Leadership Minor
-        </a>
-        </b>
-        <br>
-        (p.s. you can find my testimonial in the embedded minor link)
-
-        <br> Cumulative GPA: <strong>3.99/4.0   </strong>     </div>
+    <div class="exp">
+      <img src="uoft.png" alt="">
+      <div><div class="t">University of Toronto <span>· BASc, Engineering Science</span></div>
+      <div class="d">Robotics major, Global Leadership minor · GPA 3.99/4.0</div>
+      <div class="d">Co-Chair, Engineering Science Education Conference (2024–25), ~500 attendees</div></div>
+      <div class="when">Expected 2027</div>
     </div>
-    </section>
+  </section>
 
-    <section id="pub">
-      <h2>Publications</h2>
-      <div class="pub-list">
-        <div class="pub-item">
-          <div class="pub-teaser">
-            <img src="chem_robo.png" alt="MATTERIX robotic chemistry lab visualization">
-          </div>
-          <div class="pub-details">
-            <h3>
-              <a href="https://www.nature.com/articles/s43588-025-00924-4" target="_blank">
-                MATTERIX: Towards a Digital Twin for Robotics-Assisted Chemistry Lab Automation
-              </a>
-            </h3>
-            <div class="pub-meta">
-              <span class="pub-meta-badge">Nature Computational Science, 2025</span>
-            </div>
-            <p>
-              <em>Kourosh Darvish, Arjun Sohal, Abhijoy Mandal, Hatem Fakhruldeen, Nikola Radulov, Zhengxue Zhou, Joshua Choi, Skyler Han, Brayden Zhang, Jeeyeoun Chae, Satheeshkumar Veeramani, Alex Wright, <strong>Yijie Wang</strong>, Hossein Darvish, Yuchi (Allan) Zhao, Gary Tom, Han Hao, Miroslav Bogdanovic, Gabriella Pizzuto, Andrew Cooper, Alan Aspuru-Guzik, Florian Shkurti, Animesh Garg.</em>
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+  <section>
+    <h2>Outside the lab</h2>
+    <div class="outside">My current favourite piano piece is <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=MvSXVOizmNc"><b>Venus and Flower</b></a> by Austin Farwell, and I'm reading <b>When We Cease to Understand the World</b> by Benjamín Labatut.</div>
+  </section>
+</main>
 
-    <section id="work">
-      <h2>Experience</h2>
-      <div class="item">
-        <div class="item education-item">
-        <img src="gm.png" alt="General Motors Logo" class="edu-logo">
-        <div class="edu-text">
-        <h3>
-        <a href="https://www.gm.com" target="_blank">
-            General Motors
-        </a> 
-        <span>— Simulation Intern</span>
-        </h3>
-
-        <span>05/2025-Present</span>
-        <p>Developing realistic software-in-the-loop (SiL) automotive simulation environments and supporting algorithm
-            development for Software Defined Vehicle (SDV) architecture, including hands-free driving,
-            active safety features, in-vehicle infotainment, and embedded control systems.
-        </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="item education-item">
-        <img src="rvl.png" alt="General Motors Logo" class="edu-logo">
-        <div class="edu-text">
-        <h3>
-        <a href="https://rvl.cs.toronto.edu/" target="_blank">
-            Robot, Vision & Learning Lab
-        </a> 
-        <span>— RL Researcher</span>
-        </h3>
-
-        <span>08/2025-Present</span>
-        <p>Spending my free time reading into robotics literature and working on data augmentation for off-policy evaluation. Stay tuned!
-        </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="item education-item">
-        <img src="ac.png" alt="AC Logo" class="edu-logo">
-        <div class="edu-text">
-        <h3><a href="https://acceleration.utoronto.ca" target="_blank">
-            Acceleration Consortium
-        </a>  <span>— Robotics Researcher</span></h3>
-        <span>05/2024-03/2025</span>
-        <p> Conducted research on constrained motion planning for robotics manipulators. Developed a safe and reactive
-            motion planner based on Model Predictive Control (MPC) for autonomous chemistry experimentation, using the NVIDIA cuRobo library. Integrated
-            planner with a chemistry lab digital twin in Isaac Sim.
-        </p>
-        </div>
-      </div>
-      
-    </section>
-
-    <section id="projects">
-      <h2>Projects</h2>
-      <div class="item">
-        <div class="item education-item">
-        <img src="autoronto.png" alt="autoronto Logo" class="edu-logo">
-        <div class="edu-text">
-        <h3><a href="https://www.autodrive.utoronto.ca" target="_blank">
-            aUToronto
-        </a>  <span>— Simulation Lead</span></h3>
-        <span>09/2024-Present</span>
-        <p><strong>University of Toronto’s winning autonomous vehicle team.</strong></p>
-
-        <p><u>Planning:</u> Built a behaviour planner in 2024, performing both simulated and in-vehicle tests to evaluate performance and reliability.</p>
-
-        <p><u>Localization:</u> Worked on lane localization algorithms for GPS attenuation scenarios to improve robustness in urban environments.</p>
-
-        <p><u>Simulation:</u> Led simulation efforts in 2025, achieving 1st place in the MathWorks Simulation Challenge against 10 other university teams. Continuing to lead simulation efforts this year.</p>
-        You can check out my blog post:
-            <div style="border:1px solid #ccc; border-radius:8px; padding:16px; max-width:300px; font-family:sans-serif;">
-            <a href="https://blogs.mathworks.com/student-lounge/2025/10/06/autoronto-simulation-suite-v2x-messaging-and-emergency-vehicle-yielding/" style="text-decoration:none; color:black;">
-                <img src="v2x.png" alt="Example Image" style="width:100%; border-radius:6px 6px 0 0;">
-                <h3 style="margin:8px 0 4px 0;">aUToronto Simulation Suite: V2X Messaging and Emergency Vehicle Yielding</h3>
-            </a>
-            </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="item education-item">
-        <img src="esec.png" alt="ESEC Logo" class="edu-logo">
-        <div class="edu-text">
-        <h3><a href="https://engsci.utoronto.ca/experience/esec/esec-2025-home/" target="_blank">
-            Engineering Science Education Conference
-        </a>  <span>— Co-Chair</span></h3>
-        <span>04/2024-02/2025</span>
-        <p> Planned and oversaw all aspects of the annual Engineering Science Education Conference (ESEC) for first and second year Engineering Science students (~500 people)
-            Worked closely with the Division of Engineering Science to identify this year's goals and priorities.
-        </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="item education-item">
-        <img src="lfx.png" alt="LFX Logo" class="edu-logo">
-        <div class="edu-text">
-        <h3><a href="https://www.linuxfoundation.org" target="_blank">
-            Linux Foundation
-        </a>  <span>— LFX Mentee</span></h3>
-        <span>03/2024-05/2024</span>
-        <p> Implemented a highly requested feature in Go that enabled cross namespace referencing for event links in Knative Eventing, 
-            resulting in the completion of a critical feature to the community. Released feature in Knative 1.15 as an alpha feature and authored a blog post, 
-            contributing to the open-source ecosystem.
-            <br> You can check out my blog post:
-            <div style="border:1px solid #ccc; border-radius:8px; padding:16px; max-width:300px; font-family:sans-serif;">
-            <a href="https://knative.dev/blog/articles/cross-namespace-event-links-feature/" style="text-decoration:none; color:black;">
-                <img src="lfx2.png" alt="Example Image" style="width:100%; border-radius:6px 6px 0 0;">
-                <h3 style="margin:8px 0 4px 0;">My LFX Mentorship Experience: Cross Namespace Event Links Feature ¶</h3>
-            </a>
-            </div>
-        </p>
-        </div>
-      </div>
-    </section>
-    <section id="interests">
-        <h2>Interests</h2>
-        <p>I love all forms of art, whether through painting, music, or literature. Below you can find some of my current favourites:</p>
-        <b>Currently reading:</b> "No. 91/92: A Diary of a Year on the Bus" by Lauren Elkin
-        <br>
-        <b>Currently playing:</b> <a href="https://www.youtube.com/watch?v=c5DScnVwhG0" target="_blank">"La Valse au Clair de Lune" by Eric Christian</a>
-    </section>
-  </div>
-
-  <!-- Right column: empty column to restore three-column layout -->
-  <div class="right-column"></div>
-
-</div>
-
-<footer>
-  <p>© 2025 Yijie Wang | <a href="mailto:yijies.wang@mail.utoronto.ca">Email</a></p>
-</footer>
-
+<footer><span>© <span id="year">2026</span> Yijie Wang</span><span>Toronto, Canada</span></footer>
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>
