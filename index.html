@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preload" href="background.jpg" as="image" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/69b15ab2a1.js" crossorigin="anonymous"></script>
 <title>Yijie Wang</title>
@@ -43,6 +44,7 @@ html, body {
  .wrapper {
   display: flex;
   min-height: auto;
+  background-color: #0b2530; /* shown while the image loads */
   background-image: url('background.jpg'); /* your JPG here */
   background-size: cover;   /* cover the entire wrapper */
   background-repeat: no-repeat;
